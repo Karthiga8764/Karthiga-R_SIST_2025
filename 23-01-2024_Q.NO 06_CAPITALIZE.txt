@@ -1,0 +1,58 @@
+#You are asked to ensure that the first and last names of people begin with a capital letter in their passports. For example, alison heck should be capitalised correctly as Alison Heck.
+
+#Given a full name, your task is to capitalize the name appropriately.
+
+#Input Format
+
+#A single line of input containing the full name, .
+
+#Constraints
+
+#The string consists of alphanumeric characters and spaces.
+#Note: in a word only the first character is capitalized. Example 12abc when capitalized remains 12abc.
+
+#Output Format
+
+#Print the capitalized string, .
+
+#Sample Input
+
+#chris alan
+#Sample Output
+
+#Chris Alan
+
+
+
+#LOGIC 1:
+def solve(s):
+    # Capitalize the first letter of each word in the string
+    capitalized_name = ' '.join(word.capitalize() for word in s.split())
+    return capitalized_name
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input().strip()
+
+    result = solve(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
+
+
+
+#LOGIC 2:
+
+def solve(s):
+# Use the title() method to capitalize the first letter of each word
+    capitalized_name = s.title()
+    return capitalized_name
+
+# Input
+full_name = input()
+result = solve(full_name)
+
+# Output
+print(result)
