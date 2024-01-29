@@ -1,0 +1,87 @@
+/*
+Kristen loves playing with and comparing numbers. She thinks that if she takes two different positive numbers, the one whose digits sum to a larger number is better than the other. If the sum of digits is equal for both numbers, then she thinks the smaller number is better. For example, Kristen thinks that  is better than  and that  is better than .
+
+Given an integer, , can you find the divisor of  that Kristin will consider to be the best?
+
+Input Format
+
+A single integer denoting .
+
+Constraints
+
+Output Format
+
+Print an integer denoting the best divisor of .
+
+Sample Input 0
+
+12
+Sample Output 0
+
+6
+*/
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string ltrim(const string &);
+string rtrim(const string &);
+
+// Function to calculate the sum of digits of a number
+int sumOfDigits(int num) {
+    int sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
+    }
+    return sum;
+}
+
+int main() {
+    string n_temp;
+    getline(cin, n_temp);
+
+    int n = stoi(ltrim(rtrim(n_temp)));
+
+    int bestDivisor = 1; // Initialize with the smallest possible divisor
+    int maxDigitSum = 1; // Initialize with the smallest possible digit sum
+
+    // Loop through possible divisors
+    for (int divisor = 2; divisor <= n; divisor++) {
+        if (n % divisor == 0) {
+            int digitSum = sumOfDigits(divisor);
+            if (digitSum > maxDigitSum || (digitSum == maxDigitSum && divisor < bestDivisor)) {
+                // Update the best divisor and its digit sum
+                maxDigitSum = digitSum;
+                bestDivisor = divisor;
+            }
+        }
+    }
+
+    cout << bestDivisor << endl;
+
+    return 0;
+}
+
+string ltrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
+
+    return s;
+}
+
+string rtrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
+
+    return s;
+}
